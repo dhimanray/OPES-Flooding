@@ -1,0 +1,36 @@
+# vim:ft=plumed
+
+MOLINFO STRUCTURE=input.ala2.pdb
+phi: TORSION ATOMS=@phi-2
+psi: TORSION ATOMS=@psi-2
+ene: ENERGY
+
+target: CUSTOM ARG=psi FUNC=step(-x) PERIODIC=NO
+
+opesf: OPES_METAD ...
+  ARG=psi
+  PACE=500
+  SIGMA=0.1 #Automatically adjusted by OPES
+  BARRIER=5
+  EXCLUDED_REGION=target
+  RESTART=NO
+  #NLIST   #Only sefule for CV dim. > 1
+  FILE=Kernels.data
+  STATE_RFILE=compressed.Kernels
+  STATE_WFILE=compressed.Kernels
+  STATE_WSTRIDE=500
+  #STORE_STATES  #Can be expensive to store all states.
+...
+
+
+COMMITTOR ...
+ ARG=phi,psi
+ STRIDE=10
+ BASIN_LL1=0.6,-1.5
+ BASIN_UL1=2.0,0.0
+... COMMITTOR
+
+PRINT FMT=%g STRIDE=1 FILE=COLVAR ARG=phi,psi,ene,opesf.*
+
+ENDPLUMED
+
