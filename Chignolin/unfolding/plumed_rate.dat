@@ -49,7 +49,12 @@ d6: CONTACTMAP ATOMS1=72,87 SWITCH={RATIONAL R_0=0.12 D_0=0.17 NN=6 MM=8}
 hlda: COMBINE ARG=d1.contact-1,d2.contact-1,d3.contact-1,d4.contact-1,d5.contact-1,d6.contact-1 COEFFICIENTS=0.6188,0.5975,0.5045,-0.0708,0.0217,0.0140 PERIODIC=NO
 
 #OPES flooding
-target: CUSTOM ARG=deep.node-0 FUNC=step(0.5-x) PERIODIC=NO
+#deep-TICA
+target: CUSTOM ARG=deep.node-0 FUNC=step(0.5-x) PERIODIC=NO 
+#deep-LDA
+#target: CUSTOM ARG=deep.node-0 FUNC=step(1.0-x) PERIODIC=NO 
+#HLDA
+#target: CUSTOM ARG=hlda FUNC=step(1.2-x) PERIODIC=NO
 
 OPES_METAD ...
   LABEL=opes
