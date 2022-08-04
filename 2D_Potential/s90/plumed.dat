@@ -1,0 +1,50 @@
+# vim:ft=plumed
+UNITS NATURAL
+
+p: POSITION ATOM=1
+doubleWell: CUSTOM ARG=p.x,p.y PERIODIC=NO ...
+  FUNC=2*(x^4+y^4-2*x^2-4*y^2+2*x*y+0.8*x+0.1*y+9.28)
+...
+potential: BIASVALUE ARG=doubleWell
+
+#the rotated CVs
+theta27: CONSTANT VALUE=0.3*pi/2
+sx27: CUSTOM ARG=p.x,p.y,theta27 PERIODIC=NO FUNC=cos(z)*x-sin(z)*y
+sy27: CUSTOM ARG=p.x,p.y,theta27 PERIODIC=NO FUNC=sin(z)*x+cos(z)*y
+theta54: CONSTANT VALUE=0.6*pi/2
+sx54: CUSTOM ARG=p.x,p.y,theta54 PERIODIC=NO FUNC=cos(z)*x-sin(z)*y
+sy54: CUSTOM ARG=p.x,p.y,theta54 PERIODIC=NO FUNC=sin(z)*x+cos(z)*y
+theta90: CONSTANT VALUE=1.0*pi/2
+sx90: CUSTOM ARG=p.x,p.y,theta90 PERIODIC=NO FUNC=cos(z)*x-sin(z)*y
+sy90: CUSTOM ARG=p.x,p.y,theta90 PERIODIC=NO FUNC=sin(z)*x+cos(z)*y
+
+target: CUSTOM ARG=sx90 FUNC=step(x+0.5) PERIODIC=NO
+
+OPES_METAD ...
+  LABEL=opes
+  ARG=sx90
+  TEMP=1
+  FILE=Kernels.data
+  STATE_RFILE=compressed.Kernels
+  STATE_WFILE=compressed.Kernels
+  STATE_WSTRIDE=2000
+  PACE=100
+  SIGMA=0.05
+  BARRIER=10
+  EXCLUDED_REGION=target
+  RESTART=NO
+... OPES_METAD
+
+COMMITTOR ...
+ #ARG=p.x,p.y
+ #BASIN_LL1=1.4,-2.0
+ #BASIN_UL1=2.0,-1.4
+ ARG=sx90
+ BASIN_LL1=1.6
+ BASIN_UL1=2.0
+ STRIDE=200
+... COMMITTOR
+
+PRINT FMT=%8.4f STRIDE=100 FILE=COLVAR ARG=p.x,p.y,doubleWell,opes.bias,sx27,sy27,sx54,sy54,sx90,sy90
+
+ENDPLUMED

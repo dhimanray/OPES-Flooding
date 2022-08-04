@@ -1,0 +1,20 @@
+# plumed pesmd input
+nstep        2000000000
+tstep             0.005
+temperature       1.0
+friction          10.0
+plumed_input      ../plumed.dat
+dimension         2
+replicas          1
+basis_functions_1 BF_POWERS ORDER=1 MINIMUM=-4.0 MAXIMUM=+4.0
+basis_functions_2 BF_POWERS ORDER=1 MINIMUM=-4.0 MAXIMUM=+4.0
+input_coeffs      ../../inputs/input_md-potential.dat
+random_seed       28118
+initial_position  -1.285,1.525
+output_coeffs           /dev/null
+output_potential        /dev/null
+output_potential_grid   10
+output_histogram        /dev/null
+
+# Modified Wolfe-Quapp potential on gnulot
+# t=-pi/4*0.6;c=cos(t);s=sin(t);sp [-3:3][-3:3][0:20]2*(c*x-s*y)**4+2*(s*x+c*y)**4-4.0*(c*x-s*y)**2-8.0*(s*x+c*y)**2+4*(c*x-s*y)*(s*x+c*y)+1.6*(c*x-s*y)+0.2*(s*x+c*y)+19 w pm3d
