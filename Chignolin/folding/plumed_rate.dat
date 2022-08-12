@@ -1,12 +1,5 @@
 # vim: ft=plumed
 
-####################################
-#  >> Chignolin <<
-#  OPES Multicanonical (static) + Deep-TICA
-####################################
-
-# Load Plumed-torch interface
-#LOAD FILE=../../../plumed-libtorch-interface/PytorchModel.cpp
 
 #generated with gmx editconf -f topol.tpr -o reference.pdb, see https://www.plumed.org/doc-v2.7/user-doc/html/_m_o_l_i_n_f_o.html
 MOLINFO MOLTYPE=protein STRUCTURE=chignolin-ref.pdb
@@ -56,7 +49,7 @@ target: CUSTOM ARG=deepTICA.node-0 FUNC=step(-0.25+x) PERIODIC=NO
 
 OPES_METAD ...
   LABEL=opes
-  #ARG=deepTICA.node-0
+  ARG=deepTICA.node-0
   #ARG=deepLDA.node-0
   #ARG=hlda
   FILE=Kernels.data
