@@ -18,7 +18,7 @@ theta90: CONSTANT VALUE=1.0*pi/2
 sx90: CUSTOM ARG=p.x,p.y,theta90 PERIODIC=NO FUNC=cos(z)*x-sin(z)*y
 sy90: CUSTOM ARG=p.x,p.y,theta90 PERIODIC=NO FUNC=sin(z)*x+cos(z)*y
 
-target: CUSTOM ARG=sx27 FUNC=step(x+0.5) PERIODIC=NO
+chi_exc: CUSTOM ARG=sx27 FUNC=step(x+0.5) PERIODIC=NO
 
 OPES_METAD ...
   LABEL=opes
@@ -31,7 +31,7 @@ OPES_METAD ...
   PACE=100
   SIGMA=0.05
   BARRIER=10
-  EXCLUDED_REGION=target
+  EXCLUDED_REGION=chi_exc
   RESTART=NO
 ... OPES_METAD
 

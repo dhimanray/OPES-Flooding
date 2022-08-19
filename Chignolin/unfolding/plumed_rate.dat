@@ -50,11 +50,11 @@ hlda: COMBINE ARG=d1.contact-1,d2.contact-1,d3.contact-1,d4.contact-1,d5.contact
 
 #OPES flooding
 #deep-TICA
-target: CUSTOM ARG=deep.node-0 FUNC=step(0.5-x) PERIODIC=NO 
+chi_exc: CUSTOM ARG=deep.node-0 FUNC=step(0.5-x) PERIODIC=NO 
 #deep-LDA
-#target: CUSTOM ARG=deep.node-0 FUNC=step(1.0-x) PERIODIC=NO 
+#chi_exc: CUSTOM ARG=deep.node-0 FUNC=step(1.0-x) PERIODIC=NO 
 #HLDA
-#target: CUSTOM ARG=hlda FUNC=step(1.2-x) PERIODIC=NO
+#chi_exc: CUSTOM ARG=hlda FUNC=step(1.2-x) PERIODIC=NO
 
 OPES_METAD ...
   LABEL=opes
@@ -67,7 +67,7 @@ OPES_METAD ...
   TEMP=340
   BARRIER=15
   SIGMA=0.05
-  EXCLUDED_REGION=target
+  EXCLUDED_REGION=chi_exc
   RESTART=NO
   STATE_WSTRIDE=5000
 ... OPES_METAD

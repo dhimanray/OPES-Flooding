@@ -5,14 +5,14 @@ phi: TORSION ATOMS=@phi-2
 psi: TORSION ATOMS=@psi-2
 ene: ENERGY
 
-target: CUSTOM ARG=phi FUNC=step(x+0.1) PERIODIC=NO
+chi_exc: CUSTOM ARG=phi FUNC=step(x+0.1) PERIODIC=NO
 
 opesf: OPES_METAD ...
   ARG=phi
   PACE=500
   SIGMA=0.1 
   BARRIER=20
-  EXCLUDED_REGION=target
+  EXCLUDED_REGION=chi_exc
   RESTART=NO
   FILE=Kernels.data
   STATE_RFILE=compressed.Kernels
